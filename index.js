@@ -45,11 +45,9 @@ app.get('/', (req, res) => {
   res.render('index', { alerts: req.flash() });
 });
 
-app.get('/profile', isLoggedIn, (req, res) => {
-  res.render('profile');
-});
 
 
+app.use('/profile', require('./routes/profile'))
 app.use('/auth', require('./routes/auth'));
 app.use('/results', require('./routes/search'))
 
