@@ -14,14 +14,14 @@ router.get("/login", (req, res) => {
 router.post("/signup", (req, res) => {
   console.log(req.body);
   db.user
-    .create({
+    .findOrCreate({
       where: { email: req.body.email, userName: req.body.userName },
       defaults: {
         password: req.body.password,
         state: req.body.state,
         createdAt: Date.now(),
-        updatedAt: Date.now()
-      }
+        updatedAt: Date.now(),
+      },
     })
     .then(([user, created]) => {
       if (created) {
@@ -58,7 +58,7 @@ router.post(
     successRedirect: "/",
     failureRedirect: "/auth/login",
     successFlash: "Welcome back!",
-    failureFlash: "Either email or password incorrect, please try again"
+    failureFlash: "Either email or password incorrect, please try again",
   })
 );
 
