@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "kinawy",
+    "password": "password",
+    "database": "cbay",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "kinawy",
+    "password": "password",
+    "database": "cbay_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "kinawy",
+    "password": "password",
+    "database": "cbay_production",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
