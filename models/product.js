@@ -11,13 +11,14 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      models.product.belongsTo(models.user)
+      models.product.belongsTo(models.user);
     }
   };
   product.init({
     productName: DataTypes.STRING,
     productDesc: DataTypes.STRING,
     productType: DataTypes.STRING,
+    available: DataTypes.BOOLEAN,
     userId: DataTypes.INTEGER
   }, {
     sequelize,

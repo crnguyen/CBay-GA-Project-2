@@ -59,12 +59,15 @@ router.post(
     failureRedirect: "/auth/login",
     successFlash: "Welcome back!",
     failureFlash: "Either email or password incorrect, please try again",
-  })
+  }), (req, res) => {
+    req.session.user_id = req.user.id;
+    return
+  }
 );
 
 router.get("/logout", (req, res) => {
   req.logOut();
-  req.flash("success", "Thank you, come again... Apu");
+  req.flash("success", "Thank you, come again!");
   res.redirect("/");
 });
 

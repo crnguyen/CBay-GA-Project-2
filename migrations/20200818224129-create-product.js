@@ -17,6 +17,9 @@ module.exports = {
       productType: {
         type: Sequelize.STRING
       },
+      available: {
+        type: Sequelize.BOOLEAN
+      },
       userId: {
         type: Sequelize.INTEGER
       },

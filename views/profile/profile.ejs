@@ -1,0 +1,37 @@
+<h2>Profile Page</h2>
+
+<h3>Welcome to your PROFILE</h3>
+
+<form action="/profile" method="POST">
+  <label for="productName">Part Name</label>
+  <input id="productName" type="text" name="productName" required />
+
+  <label for="productDesc">Part Description</label>
+  <input id="productDesc" type="text" name="productDesc" required />
+
+  <label for="productType">Choose a category:</label>
+  <select name="productType" id="productType" required>
+    <option value=""></option>
+    <option value="GPU">GPU</option>
+    <option value="CPU">CPU</option>
+    <option value="PSU">PSU</option>
+    <option value="Memory">Memory</option>
+    <option value="Motherboard">Motherboard</option>
+    <option value="Storage">Storage</option>
+    <option value="FullBuild">Full Laptop/Desktop</option>
+    <option value="Misc.">Miscellaneous</option>
+  </select>
+
+  <input type="submit" value="Add Part" />
+</form>
+<h1>Parts You've Listed</h1>
+<% product.forEach(p => {%>
+<div class="product">
+  <h2><%= p.productName %></h2>
+  <p><%= p.productDesc %></p>
+  <p><%= p.user.userName %></p>
+  <h3><%= p.productType %></h3>
+  <p>Still available: <%= p.available %></p>
+  
+</div>
+<% }) %>

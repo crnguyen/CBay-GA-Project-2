@@ -1,0 +1,13 @@
+<h1><%= product.productName %></h1>
+<h3>From user: <%= product.user.userName %></h3>
+
+<% if(product.available) { %> 
+    <p>Available: <%= product.available %> </p>
+    <% if(!userClaim.gpu > 0) { %> 
+<a href="/shipment/<%= product.id%>">Claim Item</a>
+<% } else { %>
+    <p>You've already claimed a GPU</p>
+<% } %>  
+<% } else { %>
+    <p>Unavailable</p>
+<% } %>  

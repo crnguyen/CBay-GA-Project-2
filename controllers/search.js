@@ -11,14 +11,15 @@ router.get("/", (req, res) => {
 
   db.product
     .findAll({
+      include: [db.user],
       where: {
         productName: {
           [Op.iLike]: `%${searchInput.product}%`,
         },
       },
     })
-    .then((response) => {
-      res.render("search", { products: response });
+    .then((product) => {
+      res.render("search", { product: product });
     })
     .catch((error) => {
       console.log("error", error);
