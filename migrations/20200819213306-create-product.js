@@ -20,6 +20,9 @@ module.exports = {
       available: {
         type: Sequelize.BOOLEAN
       },
+      productWeight: {
+        type: Sequelize.FLOAT
+      },
       userId: {
         type: Sequelize.INTEGER
       },

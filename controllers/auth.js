@@ -18,15 +18,34 @@ router.post("/signup", (req, res) => {
       where: { email: req.body.email, userName: req.body.userName },
       defaults: {
         password: req.body.password,
+        fullName: req.body.fullName,
+        streetAddress: req.body.streetAddress,
+        city: req.body.city,
         state: req.body.state,
+        zipCode: req.body.zipCode,
+        country: req.body.country,
+        phoneNumber: req.body.phoneNumber,
         createdAt: Date.now(),
         updatedAt: Date.now(),
-      },
+      }
     })
     .then(([user, created]) => {
-      if (created) {
-        console.log(`${user.userName} was created`);
+        console.log(`${user.userName} was created`)
+          db.userClaim.findOrCreate({
+            where: { userId: user.id },
+            defaults: {
+              gpu: 0,
+              cpu: 0,
+              psu: 0,
+              memory: 0,
+              motherboard: 0,
+              storage: 0,
+              fullBuild: 0,
+              misc: 0
+            }
+          })
         // Flash Message
+        if (created) {
         passport.authenticate("local", {
           successRedirect: "/",
           successFlash: "Account created and logging in...",

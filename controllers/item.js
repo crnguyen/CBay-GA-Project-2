@@ -7,18 +7,24 @@ const isLoggedIn = require("../middleware/isLoggedIn");
 router.get("/:id", isLoggedIn, (req, res) => {
   db.product
     .findOne({
-      include: [db.user],
       where: { id: req.params.id },
     })
     .then((product) => {
-      const userClaim = { gpu: 0 };
-      res.render("item/item", { product: product, userClaim: userClaim });
+      db.user
+        .findOne({
+          include: [db.userClaim],
+          where: { id: req.user.id },
+        })
+        .then(product, user => {
+          res.render("item/item", { product: product, user: user });
+        })
+        .catch((error) => {
+          console.log("error", error);
+        });
     })
     .catch((error) => {
       console.log("error", error);
     });
 });
-
-
 
 module.exports = router;

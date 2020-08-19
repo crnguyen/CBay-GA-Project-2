@@ -17,8 +17,32 @@ module.exports = {
       password: {
         type: Sequelize.STRING
       },
+      fullName: {
+        type: Sequelize.STRING
+      },
+      streetAddress: {
+        type: Sequelize.STRING
+      },
+      streetAddress2: {
+        type: Sequelize.STRING
+      },
+      city: {
+        type: Sequelize.STRING
+      },
       state: {
         type: Sequelize.STRING
+      },
+      zipCode: {
+        type: Sequelize.STRING
+      },
+      country: {
+        type: Sequelize.STRING
+      },
+      phoneNumber: {
+        type: Sequelize.STRING
+      },
+      userClaimId: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

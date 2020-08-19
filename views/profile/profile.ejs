@@ -12,15 +12,17 @@
   <label for="productType">Choose a category:</label>
   <select name="productType" id="productType" required>
     <option value=""></option>
-    <option value="GPU">GPU</option>
-    <option value="CPU">CPU</option>
-    <option value="PSU">PSU</option>
-    <option value="Memory">Memory</option>
-    <option value="Motherboard">Motherboard</option>
-    <option value="Storage">Storage</option>
-    <option value="FullBuild">Full Laptop/Desktop</option>
-    <option value="Misc.">Miscellaneous</option>
+    <option value="gpu">GPU</option>
+    <option value="cpu">CPU</option>
+    <option value="psu">PSU</option>
+    <option value="memory">Memory</option>
+    <option value="motherboard">Motherboard</option>
+    <option value="storage">Storage</option>
+    <option value="fullBuild">Full Laptop/Desktop</option>
+    <option value="misc">Miscellaneous</option>
   </select>
+  <label for="productWeight">Please Enter the exact weight of your item</label>
+  <input id="productWeight" type="text" name="productWeight" required />
 
   <input type="submit" value="Add Part" />
 </form>
@@ -30,8 +32,8 @@
   <h2><%= p.productName %></h2>
   <p><%= p.productDesc %></p>
   <p><%= p.user.userName %></p>
-  <h3><%= p.productType %></h3>
+  <p><%= p.productWeight %> lbs.</p>
+  <h3><%= p.productType %> </h3>
   <p>Still available: <%= p.available %></p>
-  
 </div>
 <% }) %>

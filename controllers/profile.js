@@ -25,6 +25,7 @@ router.post('/', (req, res) => {
         productDesc: req.body.productDesc,
         productType: req.body.productType,
         available: true,
+        productWeight: req.body.productWeight,
         userId: req.user.id
     })
     .then(product => {
