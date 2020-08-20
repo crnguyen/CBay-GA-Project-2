@@ -40,10 +40,14 @@
 <% }) %>
 </div>
 <div class="claim">
-  <% products.forEach(p => { %> 
-    <h2><%= p.productName %> </h2>
-    <h2><%= p.productType %> </h2>
-    
-  <% }) %> 
+  <% if(user.claimeds) { %> 
+    <% user.claimeds.forEach(p => { %> 
+      <h2><%= p.product.productName %> </h2>
+      <h2><%= p.product.productType %> </h2>
+      
+    <% }) %> 
+    <% } else { %> 
+      <p>You have no claims currently</p>
+    <% } %> 
 
 </div>

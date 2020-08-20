@@ -7,8 +7,17 @@ const Easypost = require("@easypost/api");
 const EASYPOST_API_KEY_TEST = process.env.EASYPOST_API_KEY_TEST;
 const api = new Easypost(EASYPOST_API_KEY_TEST);
 
-// router.get('/:productId', isLoggedIn, (req, res) => {
-//     res.render('shipment/shipment', {productId: req.params.productId} )
+// router.get('/', isLoggedIn, (req, res) => {
+//     try {
+//         const findUser
+
+
+
+
+
+//     } catch (error) {
+//         console.log("error", error)
+//     }
 // })
 
 
