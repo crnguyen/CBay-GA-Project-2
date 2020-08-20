@@ -7,6 +7,9 @@ const SECRET_SESSION = process.env.SECRET_SESSION;
 const passport = require("./config/ppConfig");
 const flash = require("connect-flash");
 const methodOverride = require("method-override")
+const Easypost = require("@easypost/api");
+const EASYPOST_API_KEY_TEST = process.env.EASYPOST_API_KEY_TEST;
+const api = new Easypost(EASYPOST_API_KEY_TEST);
 
 //require the authorization middleware
 const isLoggedIn = require("./middleware/isLoggedIn");

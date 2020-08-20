@@ -17,8 +17,8 @@ router.get("/:id", isLoggedIn, async (req, res) => {
       where: { id: req.user.id },
     });
 
-    res.render("item/item", { product: product, user: user });
-    
+    res.render("item/item", { product: findProduct, user: findUser });
+
   } catch (error) {
     console.log("error", error);
   }

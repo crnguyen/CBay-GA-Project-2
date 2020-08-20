@@ -6,16 +6,15 @@ const { Op } = require("sequelize");
 
 router.get("/", (req, res) => {
     const userId = req.user.id;
-    console.log(userId)
     db.user.findByPk(userId, {
         include: [db.product, db.claimed]
     })
     .then(user => {
+        console.log(user.claimed)
         db.product.findAll({
             where: { id: user.claimed.productId }
         })
         .then(products => {
-            console.log(products[0].productType)
             res.render('profile/profile', {user, products})
         })
     })
