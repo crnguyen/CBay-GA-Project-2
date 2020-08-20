@@ -9,15 +9,16 @@
   "test": {
     "username": "kinawy",
     "password": "password",
-    "database": "cbay_test",
+    "database": "cbay",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
   "production": {
     "username": "kinawy",
     "password": "password",
-    "database": "cbay_production",
+    "database": "cbay",
     "host": "127.0.0.1",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "use_env_variable": "postgres://vambbxjahdipao:f586e97784c9aaddc1630b904dfb2888821ef370ea6454bc1598476e59e30d80@ec2-52-22-94-132.compute-1.amazonaws.com:5432/deb804n0peoifj"
   }
 }
