@@ -44,7 +44,10 @@
     <% user.claimeds.forEach(p => { %> 
       <h2><%= p.product.productName %> </h2>
       <h2><%= p.product.productType %> </h2>
-      
+      <form action="shipment/<%= p.id %>"  method="GET">
+      <input name="product" type="hidden" value="<%= p.id %>">
+      <button type="submit">Go to Shipping?</button>
+      </form>
     <% }) %> 
     <% } else { %> 
       <p>You have no claims currently</p>

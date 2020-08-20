@@ -7,21 +7,10 @@ router.get("/", (req, res) => {
   const userId = req.user.id;
   db.user
     .findByPk(userId, {
-      include: [db.product, {model: db.claimed, include: [db.product]}],
+      include: [db.product, { model: db.claimed, include: [db.product] }],
     })
     .then((user) => {
-        console.log(user)
-        res.render("profile/profile", { user });
-        // console.log(productsClaimed);
-        // .then((productsClaimed) => {
-        //     db.product
-        //       .findAll({
-        //         where: { id: user.claimed.productId },
-        //       })
-        // })
-        // .catch(error => {
-        //     console.log("error", error)
-        // })
+      res.render("profile/profile", { user });
     })
     .catch((error) => {
       console.log("error", error);
