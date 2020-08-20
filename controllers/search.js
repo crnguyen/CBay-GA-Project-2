@@ -7,13 +7,13 @@ const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
 const geocodingClient = mbxGeocoding({ accessToken: MAPBOX_ACCESS_TOKEN });
 
 router.get("/", (req, res) => {
-  const searchInput = { product: req.query.product };
+  const searchInput = { product: req.query.productType };
 
   db.product
     .findAll({
       include: [db.user],
       where: {
-        productName: {
+        productType: {
           [Op.iLike]: `%${searchInput.product}%`,
         },
       },

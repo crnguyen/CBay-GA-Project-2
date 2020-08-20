@@ -3,28 +3,46 @@ const router = express.Router();
 const db = require("../models");
 const { Op } = require("sequelize");
 const isLoggedIn = require("../middleware/isLoggedIn");
+const methodOverride = require("method-override");
 
-router.get("/:id", isLoggedIn, (req, res) => {
-  db.product
-    .findOne({
+router.use(methodOverride("_method"));
+
+router.get("/:id", isLoggedIn, async (req, res) => {
+  try {
+    const findProduct = await db.product.findOne({
       where: { id: req.params.id },
-    })
-    .then((product) => {
-      db.user
-        .findOne({
-          include: [db.userClaim],
-          where: { id: req.user.id },
-        })
-        .then(product, user => {
-          res.render("item/item", { product: product, user: user });
-        })
-        .catch((error) => {
-          console.log("error", error);
-        });
-    })
-    .catch((error) => {
-      console.log("error", error);
     });
+
+    const findUser = await db.user.findOne({
+      where: { id: req.user.id },
+    });
+
+    res.render("item/item", { product: product, user: user });
+    
+  } catch (error) {
+    console.log("error", error);
+  }
+});
+
+router.put("/:id", isLoggedIn, async (req, res) => {
+  try {
+    const productUpdate = await db.product.update(
+      {
+        available: false,
+      },
+      {
+        where: { id: req.params.id },
+      }
+    );
+    const findUser = await db.user.findByPk(req.user.id);
+    const createClaim = await db.claimed.create({
+      productId: req.params.id,
+      userId: req.user.id,
+    });
+    res.redirect("/profile");
+  } catch (error) {
+    console.log("Error", error);
+  }
 });
 
 module.exports = router;

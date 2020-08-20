@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+const bcrypt = require('bcrypt')
 module.exports = (sequelize, DataTypes) => {
   class user extends Model {
     /**
@@ -11,6 +12,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.user.hasMany(models.product)
+      models.user.hasOne(models.claimed)
+      models.user.hasMany(models.shipment)
     }
   };
   user.init({
@@ -71,8 +75,7 @@ module.exports = (sequelize, DataTypes) => {
           msg: 'Please enter a 9 digit phone number'
         }
       }
-    },
-    userClaimId: DataTypes.INTEGER
+    }
   }, {
     sequelize,
     modelName: 'user',

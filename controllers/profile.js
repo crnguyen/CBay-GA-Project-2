@@ -5,14 +5,19 @@ const { Op } = require("sequelize");
 
 
 router.get("/", (req, res) => {
-    console.log(req.user)
-    db.product.findAll({
-        include: [db.user],
-        where: { userId: req.user.id }
+    const userId = req.user.id;
+    console.log(userId)
+    db.user.findByPk(userId, {
+        include: [db.product, db.claimed]
     })
-    .then(product => {
-        res.render('profile/profile', {product: product})
-
+    .then(user => {
+        db.product.findAll({
+            where: { id: user.claimed.productId }
+        })
+        .then(products => {
+            console.log(products[0].productType)
+            res.render('profile/profile', {user, products})
+        })
     })
     .catch(error => {
         console.log("error", error)

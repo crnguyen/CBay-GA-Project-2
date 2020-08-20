@@ -1,6 +1,6 @@
 <h2>Profile Page</h2>
 
-<h3>Welcome to your PROFILE</h3>
+<h3>Welcome to your PROFILE <%= user.email %> </h3>
 
 <form action="/profile" method="POST">
   <label for="productName">Part Name</label>
@@ -26,14 +26,23 @@
 
   <input type="submit" value="Add Part" />
 </form>
+<div class="add">
 <h1>Parts You've Listed</h1>
-<% product.forEach(p => {%>
+<% user.products.forEach(p => {%>
 <div class="product">
   <h2><%= p.productName %></h2>
   <p><%= p.productDesc %></p>
-  <p><%= p.user.userName %></p>
+  <p><%= user.userName %></p>
   <p><%= p.productWeight %> lbs.</p>
   <h3><%= p.productType %> </h3>
   <p>Still available: <%= p.available %></p>
 </div>
 <% }) %>
+</div>
+<div class="claim">
+  <% products.forEach(p => { %> 
+    <h2><%= p.productType %> </h2>
+    
+  <% }) %> 
+
+</div>

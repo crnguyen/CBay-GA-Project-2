@@ -1,14 +1,13 @@
 <h1>Search Results</h1>
 
 <% product.forEach(p => {%>
+  <% if(p.available) { %> 
 <div class="product">
   <a href="/itempage/<%= p.id %>"><%= p.productName %></a>
-
-  <p><%= p.productDesc %></p>
   <p><%= p.user.userName %></p>
   <h3><%= p.productType %></h3>
-
-  <p>Still available: <%= p.available %></p>
 </div>
-
-<% }) %>
+<% } else { %>
+  
+  <% } %>  
+  <% }) %>

@@ -1,12 +1,8 @@
 <h1><%= product.productName %></h1>
 <h3>From user: <%= user.userName %></h3>
-
-<% if(product.available && user.userClaim.`${product.productType}` < 1) { %> 
-    <p>Available: <%= product.available %> </p>
-<a href="/shipment/<%= product.id %>">Claim Item</a>
-<% } else if (user.userClaim.`${product.productType}` > 0) { %>
-    <p>You've already claimed a GPU</p>
-<% } else { %>
-    <p>Unavailable</p>
-<% } %>  
+<h2><%= product.productDesc %> </h2>
+<form action="/itempage/<%= product.id %>?_method=PUT" method="POST">
+    <input type="hidden" name="_method" value="PUT">
+<button type="submit">Add to Claims?</button>
+</form>
 

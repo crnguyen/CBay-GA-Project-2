@@ -31,19 +31,6 @@ router.post("/signup", (req, res) => {
     })
     .then(([user, created]) => {
         console.log(`${user.userName} was created`)
-          db.userClaim.findOrCreate({
-            where: { userId: user.id },
-            defaults: {
-              gpu: 0,
-              cpu: 0,
-              psu: 0,
-              memory: 0,
-              motherboard: 0,
-              storage: 0,
-              fullBuild: 0,
-              misc: 0
-            }
-          })
         // Flash Message
         if (created) {
         passport.authenticate("local", {
@@ -74,7 +61,7 @@ router.post("/signup", (req, res) => {
 router.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/profile",
+    successRedirect: "/",
     failureRedirect: "/auth/login",
     successFlash: "Welcome back!",
     failureFlash: "Either email or password incorrect, please try again",
