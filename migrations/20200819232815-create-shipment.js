@@ -14,6 +14,18 @@ module.exports = {
       productId: {
         type: Sequelize.INTEGER
       },
+      trackingNumber: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      label: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
+      trackingEmbed: {
+        type: Sequelize.STRING,
+        allowNull: true
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

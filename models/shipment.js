@@ -17,7 +17,10 @@ module.exports = (sequelize, DataTypes) => {
   };
   shipment.init({
     userId: DataTypes.INTEGER,
-    productId: DataTypes.INTEGER
+    productId: DataTypes.INTEGER,
+    trackingNumber: DataTypes.STRING,
+    label: DataTypes.STRING,
+    trackingEmbed: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'shipment',

@@ -1,6 +1,6 @@
 <h2>Profile Page</h2>
 
-<h3>Welcome to your PROFILE <%= user.email %> </h3>
+<h3>Welcome to your PROFILE: <%= user.userName %></h3>
 
 <form action="/profile" method="POST">
   <label for="productName">Part Name</label>
@@ -23,34 +23,55 @@
   </select>
   <label for="productWeight">Please Enter the exact weight of your item</label>
   <input id="productWeight" type="text" name="productWeight" required />
+  <h5>
+    Please enter the shipping information that will be associated with this
+    product
+  </h5>
+  <label for="fullName">Full Name</label>
+  <input id="fullName" type="text" name="fullName" required />
+
+  <label for="streetAddress">Street Address</label>
+  <input id="streetAddress" type="text" name="streetAddress" required />
+
+  <label for="streetAddress2">Apartment Number</label>
+  <input id="streetAddress2" type="text" name="streetAddress2" />
+
+  <label for="city">City</label>
+  <input id="city" type="text" name="city" required />
+
+  <label for="state">State</label>
+  <input id="state" type="text" name="state" required />
+
+  <label for="country">Country</label>
+  <input id="country" type="text" name="country" required />
+
+  <label for="zipCode">Zip Code</label>
+  <input id="zipCode" type="text" name="zipCode" required />
+
+  <label for="phoneNumber">Phone Number</label>
+  <input id="phoneNumber" type="text" name="phoneNumber" />
 
   <input type="submit" value="Add Part" />
 </form>
 <div class="add">
-<h1>Parts You've Listed</h1>
-<% user.products.forEach(p => {%>
-<div class="product">
-  <h2><%= p.productName %></h2>
-  <p><%= p.productDesc %></p>
-  <p><%= user.userName %></p>
-  <p><%= p.productWeight %> lbs.</p>
-  <h3><%= p.productType %> </h3>
-  <p>Still available: <%= p.available %></p>
-</div>
-<% }) %>
+  <h1>Parts You've Listed</h1>
+  <% user.products.forEach(p => {%>
+  <div class="product">
+    <h2><%= p.productName %></h2>
+    <p><%= p.productDesc %></p>
+    <p><%= user.userName %></p>
+    <p><%= p.productWeight %> lbs.</p>
+    <h3><%= p.productType %></h3>
+    <p>Still available: <%= p.available %></p>
+  </div>
+  <% }) %>
 </div>
 <div class="claim">
-  <% if(user.claimeds) { %> 
-    <% user.claimeds.forEach(p => { %> 
-      <h2><%= p.product.productName %> </h2>
-      <h2><%= p.product.productType %> </h2>
-      <form action="shipment/<%= p.id %>"  method="GET">
-      <input name="product" type="hidden" value="<%= p.id %>">
-      <button type="submit">Go to Shipping?</button>
-      </form>
-    <% }) %> 
-    <% } else { %> 
-      <p>You have no claims currently</p>
-    <% } %> 
-
+  <% if(user.claimeds) { %> <% user.claimeds.forEach(p => { %>
+  <h2><%= p.product.productName %></h2>
+  <h2><%= p.product.productType %></h2>
+  <a href="shipment/<%= p.product.id %>">Go To Shipping?</a>
+  <% }) %> <% } else { %>
+  <p>You have no claims currently</p>
+  <% } %>
 </div>

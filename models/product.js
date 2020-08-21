@@ -20,16 +20,51 @@ module.exports = (sequelize, DataTypes) => {
     productName: DataTypes.STRING,
     productDesc: DataTypes.STRING,
     productType: DataTypes.STRING,
-    available: DataTypes.BOOLEAN,
+    available: { 
+      type: DataTypes.BOOLEAN,
+      defaultValue: true
+    },
     productWeight: DataTypes.FLOAT,
-    fullName: DataTypes.STRING,
+    fullName: {
+      type: DataTypes.STRING,
+      validate: {
+        len: {
+          args: [1, 99],
+          msg: 'Name must be 1 to 99 characters'
+        }
+      }
+    },
     streetAddress: DataTypes.STRING,
     streetAddress2: DataTypes.STRING,
     city: DataTypes.STRING,
-    state: DataTypes.STRING,
-    zipCode: DataTypes.STRING,
+    state: {
+      type: DataTypes.STRING,
+      validate: {
+        len: {
+          args: [2],
+          msg: 'Please enter your state abbreviation'
+        }
+      }
+    },
+    zipCode: {
+      type: DataTypes.STRING,
+      validate: {
+        len: {
+          args: [5],
+          msg: 'Please enter a 5 digit zipcode'
+        }
+      }
+    },
     country: DataTypes.STRING,
-    phoneNumber: DataTypes.STRING,
+    phoneNumber: {
+      type: DataTypes.STRING,
+      validate: {
+        len: {
+          args: [9],
+          msg: 'Please enter a 9 digit phone number'
+        }
+      }
+    },
     shipmentId: DataTypes.INTEGER,
     claimId: DataTypes.INTEGER,
     userId: DataTypes.INTEGER

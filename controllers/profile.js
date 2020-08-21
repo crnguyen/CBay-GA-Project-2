@@ -23,13 +23,21 @@ router.post("/", (req, res) => {
       productName: req.body.productName,
       productDesc: req.body.productDesc,
       productType: req.body.productType,
-      available: true,
       productWeight: req.body.productWeight,
+      fullName: req.body.fullName,
+      streetAddress: req.body.streetAddress,
+      streetAddress2: req.body.streetAddress2,
+      city: req.body.city,
+      state: req.body.state,
+      country: req.body.country,
+      zipCode: req.body.country,
+      phoneNumber: req.body.phoneNumber,
       userId: req.user.id,
+      
     })
     .then((product) => {
       res.redirect("/profile");
     });
-});
-
+  });
+  
 module.exports = router;
