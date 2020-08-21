@@ -1,19 +1,36 @@
 <h2>Welcome To CBAY!</h2>
 
-<p>Welcome to C-Bay! C-Bay is an application, that allows you to take no longer used computer parts, and let users browse and select parts that will help further their computing experience. Users are encouraged to only take advantage of this website if they do not have the means to get these parts otherwise. Shipping for now will covered by receiver, until a better system can be implemented! If you would like to select a part, or list a part, please create a user profile, and get started.</p>
+<p>
+  Welcome to C-Bay! C-Bay is an application, that allows you to take no longer
+  used computer parts, and let users browse and select parts that will help
+  further their computing experience. Users are encouraged to only take
+  advantage of this website if they do not have the means to get these parts
+  otherwise. Shipping for now will covered by receiver, until a better system
+  can be implemented! If you would like to select a part, or list a part, please
+  create a user profile, and get started.
+</p>
+<div style="width: 400px;" class="row">
+  <div class="col s8">
 
-<form action="results" method="GET">
-    <label for="productType">Choose a category:</label>
-  <select name="productType" id="productType" required>
-    <option value=""></option>
-    <option value="gpu">GPU</option>
-    <option value="cpu">CPU</option>
-    <option value="psu">PSU</option>
-    <option value="memory">Memory</option>
-    <option value="motherboard">Motherboard</option>
-    <option value="storage">Storage</option>
-    <option value="fullBuild">Full Laptop/Desktop</option>
-    <option value="misc">Miscellaneous</option>
-  </select>
-  <button type="submit">Search</button>
-</form>
+    <form action="results" method="GET">
+      <label for="productType">Choose a category:</label>
+      <select
+        name="productType"
+        id="productType"
+        class="input-field"
+        required
+      >
+        <option value=""></option>
+        <option value="gpu">GPU</option>
+        <option value="cpu">CPU</option>
+        <option value="psu">PSU</option>
+        <option value="memory">Memory</option>
+        <option value="motherboard">Motherboard</option>
+        <option value="storage">Storage</option>
+        <option value="fullBuild">Full Laptop/Desktop</option>
+        <option value="misc">Miscellaneous</option>
+      </select>
+      <button type="submit">Search</button>
+    </form>
+  </div>
+</div>

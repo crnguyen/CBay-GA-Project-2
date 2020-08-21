@@ -7,14 +7,18 @@ const Easypost = require("@easypost/api");
 const EASYPOST_API_KEY_TEST = process.env.EASYPOST_API_KEY_TEST;
 const api = new Easypost(EASYPOST_API_KEY_TEST);
 
-router.get("/:id", async (req, res) => {
-  const toUserAddress = await req.user.dataValues;
-  const fromProductAddress = await db.product.findByPk(req.params.id);
-
-  res.render("shipment/shipment", {
-    user: toUserAddress,
-    product: fromProductAddress,
-  });
+router.get("/:id", (req, res) => {
+  let toUserAddress = req.user.dataValues;
+  db.product.findByPk(req.params.id)
+    .then((product) => {
+      res.render("shipment/shipment", {
+        user: toUserAddress,
+        product: product,
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 });
 
 router.get("/:id/success", async (req, res) => {
@@ -49,17 +53,24 @@ router.get("/:id/success", async (req, res) => {
     from_address: fromAddress,
     parcel: parcel,
   });
-  shipment.save().then((shipmentData) => {
-    api.Shipment.retrieve(shipmentData.id).then((s) => {
-      s.buy(s.lowestRate(), 0.0)
-        .then(console.log)
-        .catch((error) => {
-          console.log(error);
-        });
-    });
-  });
+  shipment
+    .save()
+    .then((shipmentData) => {
+      api.Shipment.retrieve(shipmentData.id).then((s) => {
+        s.buy(s.lowestRate(), 0.0)
+          .then((builtShipment) => {
+            console.log(builtShipment);
+            res.render("shipment/success", { builtShipment });
+          })
 
-  res.redirect("/");
+          .catch((error) => {
+            console.log(error);
+          });
+      });
+    })
+    .catch((error) => {
+      console.log("error", error);
+    });
 });
 
 module.exports = router;

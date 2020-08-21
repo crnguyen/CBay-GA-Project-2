@@ -53,25 +53,51 @@
 
   <input type="submit" value="Add Part" />
 </form>
-<div class="add">
-  <h1>Parts You've Listed</h1>
-  <% user.products.forEach(p => {%>
-  <div class="product">
-    <h2><%= p.productName %></h2>
-    <p><%= p.productDesc %></p>
-    <p><%= user.userName %></p>
-    <p><%= p.productWeight %> lbs.</p>
-    <h3><%= p.productType %></h3>
-    <p>Still available: <%= p.available %></p>
+<div class="profile-items">
+  <div class="add">
+    <h4>Parts You've Listed</h4>
+    <% user.products.forEach(p => {%>
+    <div class="row">
+      <div class="col s12">
+        <div class="card blue darken-3">
+          <div class="card-content white-text">
+            <span class="card-title"><%= p.productName %></span>
+            <div class="product">
+              <p><%= p.productDesc %></p>
+              <p><%= user.userName %></p>
+
+              <p>Still available: <%= p.available %></p>
+            </div>
+          </div>
+          <div class="card-action">
+            <p><%= p.productWeight %> lbs.</p>
+            <p><%= p.productType %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <% }) %>
   </div>
-  <% }) %>
-</div>
-<div class="claim">
-  <% if(user.claimeds) { %> <% user.claimeds.forEach(p => { %>
-  <h2><%= p.product.productName %></h2>
-  <h2><%= p.product.productType %></h2>
-  <a href="shipment/<%= p.product.id %>">Go To Shipping?</a>
-  <% }) %> <% } else { %>
-  <p>You have no claims currently</p>
-  <% } %>
+  <div class="claim">
+    <h4>Parts you've claimed</h4>
+    <% if(user.claimeds) { %> <% user.claimeds.forEach(p => { %>
+      <div class="row">
+        <div class="col s12">
+          <div class="card teal darken-3">
+            <div class="card-content white-text">
+              <span class="card-title"><%= p.product.productName %></span>
+              <h2><%= p.product.productType %></h2>
+            </div>
+            <div class="card-action">
+              <a href="shipment/<%= p.product.id %>">Go To Shipping?</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    <% }) %> <% } else { %>
+    <p>You have no claims currently</p>
+    <% } %>
+  </div>
 </div>

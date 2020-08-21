@@ -52,12 +52,16 @@ app.get("/", (req, res) => {
   res.render("index", { alerts: req.flash() });
 });
 
+
 app.use("/profile", isLoggedIn, require("./controllers/profile"));
 app.use("/auth", require("./controllers/auth"));
 app.use("/results", require("./controllers/search"));
 app.use("/itempage", require("./controllers/item"));
 app.use('/shipment', isLoggedIn, require('./controllers/shipment'))
 
+app.get('*', (req, res) => {
+  res.render('error')
+})
 const port = process.env.PORT || 3000;
 const server = app.listen(port, () => {
   console.log(`🎧 You're listening to the smooth sounds of port ${port} 🎧`);
