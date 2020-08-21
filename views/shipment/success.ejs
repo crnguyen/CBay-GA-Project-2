@@ -1,1 +1,9 @@
 <h1>Your product has shipped!</h1>
+<p>Tracking number: <%= builtShipment.tracking_code %> </p>
+<a href="<%= builtShipment.postage_label.label_url %> ">Click here to view and print your label</a>
+<p>Carrier: <%= builtShipment.selected_rate.carrier %> </p>
+<p>Service: <%= builtShipment.selected_rate.service %> </p>
+<p>You Paid: <%= builtShipment.selected_rate.retail_rate %> </p>
+<a href="<%= builtShipment.tracker.public_url %> ">Track your shipment here</a>
+
+
