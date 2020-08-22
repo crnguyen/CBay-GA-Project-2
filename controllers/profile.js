@@ -2,8 +2,9 @@ const express = require("express");
 const router = express.Router();
 const db = require("../models");
 const { Op } = require("sequelize");
+const isLoggedIn = require("../middleware/isLoggedIn");
 
-router.get("/", (req, res) => {
+router.get("/", isLoggedIn, (req, res) => {
   const userId = req.user.id;
   db.user
     .findByPk(userId, {
@@ -17,7 +18,7 @@ router.get("/", (req, res) => {
     });
 });
 
-router.post("/", (req, res) => {
+router.post("/", isLoggedIn, (req, res) => {
   db.product
     .create({
       productName: req.body.productName,
@@ -39,5 +40,15 @@ router.post("/", (req, res) => {
       res.redirect("/profile");
     });
   });
+
+  router.delete('/', isLoggedIn, (req, res) => {
+    console.log(req)
+    db.product.destroy({
+      where: { id: req.body.deleteProduct }
+    })
+    .then(() => {
+      res.redirect('/profile')
+    })
+  })
   
 module.exports = router;

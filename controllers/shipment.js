@@ -7,9 +7,10 @@ const Easypost = require("@easypost/api");
 const EASYPOST_API_KEY_TEST = process.env.EASYPOST_API_KEY_TEST;
 const api = new Easypost(EASYPOST_API_KEY_TEST);
 
-router.get("/:id", (req, res) => {
+router.get("/:id", isLoggedIn, (req, res) => {
   let toUserAddress = req.user.dataValues;
-  db.product.findByPk(req.params.id)
+  db.product
+    .findByPk(req.params.id)
     .then((product) => {
       res.render("shipment/shipment", {
         user: toUserAddress,
@@ -21,7 +22,7 @@ router.get("/:id", (req, res) => {
     });
 });
 
-router.get("/:id/success", async (req, res) => {
+router.post("/:id/success", isLoggedIn, async (req, res) => {
   const toUserAddress = await req.user.dataValues;
   const fromProductAddress = await db.product.findByPk(req.params.id);
 
@@ -56,17 +57,28 @@ router.get("/:id/success", async (req, res) => {
   shipment
     .save()
     .then((shipmentData) => {
-      api.Shipment.retrieve(shipmentData.id).then((s) => {
-        s.buy(s.lowestRate(), 0.0)
-          .then((builtShipment) => {
-            console.log(builtShipment);
-            res.render("shipment/success", { builtShipment });
-          })
+      api.Shipment.retrieve(shipmentData.id)
+        .then((s) => {
+          s.buy(s.lowestRate(), 0.0)
+            .then((builtShipment) => {
+              console.log(builtShipment);
+              db.shipment.create({
+                userId: toUserAddress.id,
+                productId: fromProductAddress.id,
+                trackingNumber: builtShipment.tracking_code,
+                label: builtShipment.postage_label.label_url,
+                trackingEmbed: builtShipment.tracker.public_url
+              })
+              res.render("shipment/success", { builtShipment });
+            })
 
-          .catch((error) => {
-            console.log(error);
-          });
-      });
+            .catch((error) => {
+              console.log(error);
+            });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     })
     .catch((error) => {
       console.log("error", error);

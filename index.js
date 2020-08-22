@@ -56,7 +56,7 @@ app.get("/", (req, res) => {
 app.use("/profile", isLoggedIn, require("./controllers/profile"));
 app.use("/auth", require("./controllers/auth"));
 app.use("/results", require("./controllers/search"));
-app.use("/itempage", require("./controllers/item"));
+app.use("/itempage", isLoggedIn, require("./controllers/item"));
 app.use('/shipment', isLoggedIn, require('./controllers/shipment'))
 
 app.get('*', (req, res) => {

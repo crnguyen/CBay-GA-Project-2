@@ -1,14 +1,14 @@
-<h2>Profile Page</h2>
-
-<h3>Welcome to your PROFILE: <%= user.userName %></h3>
+<h3 style="font-size: large; text-align: center;">
+  Welcome to your PROFILE: <%= user.userName %>
+</h3>
 <div style="width: 400px;" class="row">
   <form action="/profile" method="POST">
     <label for="productName">Part Name</label>
     <input id="productName" type="text" name="productName" required />
-    
+
     <label for="productDesc">Part Description</label>
     <input id="productDesc" type="text" name="productDesc" required />
-    
+
     <label for="productType">Choose a category:</label>
     <select name="productType" id="productType" required>
       <option value=""></option>
@@ -21,42 +21,44 @@
       <option value="fullBuild">Full Laptop/Desktop</option>
       <option value="misc">Miscellaneous</option>
     </select>
-    <label for="productWeight">Please Enter the exact weight of your item</label>
+    <label for="productWeight"
+      >Please Enter the exact weight of your item</label
+    >
     <input id="productWeight" type="text" name="productWeight" required />
-    <h5>
+    <h5 style="font-size: large;">
       Please enter the shipping information that will be associated with this
       product
     </h5>
     <label for="fullName">Full Name</label>
     <input id="fullName" type="text" name="fullName" required />
-    
+
     <label for="streetAddress">Street Address</label>
     <input id="streetAddress" type="text" name="streetAddress" required />
-    
+
     <label for="streetAddress2">Apartment Number</label>
     <input id="streetAddress2" type="text" name="streetAddress2" />
-    
+
     <label for="city">City</label>
     <input id="city" type="text" name="city" required />
-    
+
     <label for="state">State</label>
     <input id="state" type="text" name="state" required />
-    
+
     <label for="country">Country</label>
     <input id="country" type="text" name="country" required />
-    
+
     <label for="zipCode">Zip Code</label>
     <input id="zipCode" type="text" name="zipCode" required />
-    
+
     <label for="phoneNumber">Phone Number</label>
     <input id="phoneNumber" type="text" name="phoneNumber" />
-    
+
     <input type="submit" value="Add Part" />
   </form>
 </div>
 <div class="profile-items">
   <div class="add">
-    <h4>Parts You've Listed</h4>
+    <h4 style="text-align: center;">Parts You've Listed</h4>
     <% user.products.forEach(p => {%>
     <div class="row">
       <div class="col s12">
@@ -68,9 +70,23 @@
               <p><%= user.userName %></p>
               <br />
               <% if(p.available) { %>
-              <p style="color: rgb(165, 250, 7);">Still available: <%= p.available %></p>
+              <form action="/profile?_method=DELETE" method="POST">
+                <input type="hidden" value="<%= p.id %>" name="deleteProduct" />
+                <button
+                  type="submit"
+                  class="btn-floating btn-large waves-effect waves-light red"
+                >
+                  <i class="material-icons">delete</i>>
+                </button>
+              </form>
+              <br />
+              <p style="color: rgb(165, 250, 7);">
+                Still available: <%= p.available %>
+              </p>
               <% } else { %>
-              <p style="color: rgb(116, 146, 153);">Still available: <%= p.available %></p>
+              <p style="color: rgb(116, 146, 153);">
+                Still available: <%= p.available %>
+              </p>
               <% } %>
             </div>
           </div>
@@ -78,6 +94,7 @@
             <p><%= p.productWeight %> lbs.</p>
             <h5><%= p.productType %></h5>
           </div>
+          <form action="/profile" method="POST"></form>
         </div>
       </div>
     </div>
@@ -85,11 +102,11 @@
     <% }) %>
   </div>
   <div class="claim">
-    <h4>Parts you've claimed</h4>
+    <h4 style="text-align: center;">Parts you've claimed</h4>
     <% if(user.claimeds) { %> <% user.claimeds.forEach(p => { %>
     <div class="row">
       <div class="col s12">
-        <div class="card teal darken-3">
+        <div class="card teal darken-3" style="border-radius: 10px;">
           <div class="card-content white-text">
             <span class="card-title"><%= p.product.productName %></span>
             <h2><%= p.product.productType %></h2>
