@@ -8,7 +8,7 @@ router.get("/", isLoggedIn, (req, res) => {
   const userId = req.user.id;
   db.user
     .findByPk(userId, {
-      include: [db.product, { model: db.claimed, include: [db.product] }],
+      include: [db.product, db.shipment, { model: db.claimed, include: [db.product] }],
     })
     .then((user) => {
       res.render("profile/profile", { user });

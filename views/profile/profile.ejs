@@ -91,6 +91,16 @@
             </div>
           </div>
           <div class="card-action">
+            <% if(user.shipments) { %>
+            <a href="<%= user.shipments.label %>"
+              >Click here to view and print your label</a
+            >
+            <br />
+            <hr />
+            <a href="<%= user.shipments.trackingEmbed %> "
+              >Track your shipment here</a
+            >
+            <% } %>
             <p><%= p.productWeight %> lbs.</p>
             <h5><%= p.productType %></h5>
           </div>

@@ -10,13 +10,8 @@
         <p>Service: <%= builtShipment.selected_rate.service %></p>
         <p>You Paid: <%= builtShipment.selected_rate.retail_rate %></p>
       </div>
-      <div class="card-action">
-        <a href="<%= builtShipment.postage_label.label_url %> "
-          >Click here to view and print your label</a
-        >
-        <a href="<%= builtShipment.tracker.public_url %> "
-          >Track your shipment here</a
-        >
+      <div class="card-action">    
+        <a href="/profile">Back To Your profile</a> 
       </div>
     </div>
   </div>
