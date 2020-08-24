@@ -6,6 +6,7 @@ const isLoggedIn = require("../middleware/isLoggedIn");
 
 router.get("/", isLoggedIn, (req, res) => {
   const userId = req.user.id;
+  console.log(userId)
   db.user
     .findByPk(userId, {
       include: [db.product, db.shipment, { model: db.claimed, include: [db.product] }],
@@ -39,7 +40,10 @@ router.post("/", isLoggedIn, (req, res) => {
     })
     .then((product) => {
       res.redirect("/profile");
-    });
+    })
+    .catch(error => {
+      console.log(error)
+    })
   });
 
   router.delete('/', isLoggedIn, (req, res) => {
@@ -49,6 +53,9 @@ router.post("/", isLoggedIn, (req, res) => {
     })
     .then(() => {
       res.redirect('/profile')
+    })
+    .catch(error => {
+      console.log(error)
     })
   })
   
