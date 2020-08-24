@@ -60,3 +60,8 @@
   -webkit-background-clip: text;
   background-clip: text;
 }
+
+.pic {
+  width: 200px;
+  height: 200px;
+}
