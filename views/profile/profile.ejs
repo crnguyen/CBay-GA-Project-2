@@ -91,16 +91,18 @@
             </div>
           </div>
           <div class="card-action">
-            <% if(user.shipments) { %>
-            <a href="<%= user.shipments.label %>"
+            <% user.shipments.forEach(s => { %> 
+              <% if(s.productId == p.id) { %>
+            <a href="<%= s.label %>"
               >Click here to view and print your label</a
             >
             <br />
             <hr />
-            <a href="<%= user.shipments.trackingEmbed %> "
+            <a href="<%= s.trackingEmbed %> "
               >Track your shipment here</a
             >
             <% } %>
+            <% }) %> 
             <p><%= p.productWeight %> lbs.</p>
             <h5><%= p.productType %></h5>
           </div>

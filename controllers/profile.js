@@ -11,6 +11,7 @@ router.get("/", isLoggedIn, (req, res) => {
       include: [db.product, db.shipment, { model: db.claimed, include: [db.product] }],
     })
     .then((user) => {
+      console.log(user.get())
       res.render("profile/profile", { user });
     })
     .catch((error) => {
